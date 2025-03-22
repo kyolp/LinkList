@@ -1,16 +1,49 @@
 package umg.edu.gt.desarrollo.estructuradedatos2025.ejercicios;
-
+import java.util.LinkedList;
 public class EjercicioLinkedList {
-	
-	/** INSTRUCCIONES
- 	Escriba el algoritmo que resuelve el problema en esta clase.
-	Debe crear un package llamado umg.edu.gt.test.EjercicioLinkedList que corresponda al Test de esta clase.
-	Genere un Test por cada ejemplo y fuerce que uno de esos Test falle, puede implementar retornar un resultado
-	y compararlo con el esperado.
-	 */
-	
-	// Usando LinkedList de Java Collections, resuelva los siguientes problemas
-	// Problema 1: Dada una LinkedList<Integer>, escribir un método que elimine los valores duplicados, dejando solo la primera aparición de cada número.
-	// Problema 2: Implementar un método que invierta los elementos de una LinkedList<String> sin usar otra lista o ArrayList.
-	// Problema 3: Dadas dos listas enlazadas ordenadas de enteros, escribir un método que devuelva una nueva LinkedList<Integer> con los elementos de ambas listas intercalados en orden.
+
+    // Problema 1: Eliminar duplicados
+    public static void eliminarDuplicados(LinkedList<Integer> lista) {
+        for (int i = 0; i < lista.size(); i++) {
+            Integer actual = lista.get(i);
+            for (int j = lista.size() - 1; j > i; j--) {
+                if (lista.get(j).equals(actual)) {
+                    lista.remove(j);
+                }
+            }
+        }
+    }
+
+    // Problema 2: Invertir lista sin usar otra estructura
+    public static void invertirLista(LinkedList<String> lista) {
+        int n = lista.size();
+        for (int i = 0; i < n / 2; i++) {
+            String temp = lista.get(i);
+            lista.set(i, lista.get(n - 1 - i));
+            lista.set(n - 1 - i, temp);
+        }
+    }
+
+    // Problema 3: Intercalar dos listas ordenadas
+    public static LinkedList<Integer> intercalarListasOrdenadas(LinkedList<Integer> l1, LinkedList<Integer> l2) {
+        LinkedList<Integer> resultado = new LinkedList<>();
+        int i = 0, j = 0;
+
+        while (i < l1.size() && j < l2.size()) {
+            if (l1.get(i) <= l2.get(j)) {
+                resultado.add(l1.get(i));
+                i++;
+            } else {
+                resultado.add(l2.get(j));
+                j++;
+            }
+        }
+
+        while (i < l1.size()) resultado.add(l1.get(i++));
+        while (j < l2.size()) resultado.add(l2.get(j++));
+
+        return resultado;
+    }
 }
+
+
